@@ -12,16 +12,18 @@ function getSolutions( a, b, c ) {
   	let x1 = -b / (2 * a);
   	return { D: discriminant, roots: [ x1 ] };
    } else if (discriminant > 0) {
-    let x1 = ((-b + Math.sqrt(discriminant)) / 2 * a);
-    let x2 = ((-b - Math.sqrt(discriminant)) / 2 * a); 
+    let x1 = ((-b + Math.sqrt(discriminant)) / (2 * a));
+    let x2 = ((-b - Math.sqrt(discriminant)) / (2 * a)); 
     return { D: discriminant, roots: [ x1, x2 ] };
    }
 }
 
 function showSolutionsMessage(a, b, c) {
   let result = getSolutions(a, b, c);
-
-  if (result.roots.length === 0) {
+  let message;
+  let showRoots;
+  
+if (result.roots.length === 0) {
     showRoots = `Уравнение не имеет вещественных корней`;
   }
   if (result.roots.length === 1) {
@@ -45,6 +47,36 @@ showSolutionsMessage(2, 4, 2);
 
 //Задача №2
 
+/* еще одно решение через Object.values
+let inputData2 = {
+  algebra: [2, 4, 5, 2, 3, 4],
+  geometry: [2, 4, 5],
+  russian: [3, 3, 4, 5],
+  physics: [5, 5],
+  music: [2, 2, 6],
+  english: [4, 4, 3],
+  poetry: [5, 3, 4],
+  chemistry: [2],
+  french: [4, 4],
+};
+function getAverageMark2(marks) {
+  let averageMark2 = 0;
+  for (let i = 0; i < marks.length; i++) {
+  averageMark2 += +marks[i];
+  }
+  return averageMark2 / marks.length;
+}
+function average2(data) {
+  let res= {};
+  for (let i in data) {
+    res[i] = getAverageMark2(data[i]);
+  }
+  return res;
+}
+average2(inputData2)
+let res = average2(inputData2);
+res.average2 = getAverageMark2(Object.values(res));
+*/
 
 function getAverageScore(data) {
 
@@ -68,6 +100,7 @@ let everageMark = 0,
     sum = 0;
   for (let i = 0; i < marks.length; i++) {
     sum += marks[i];
+   }
     everageMark = sum / marks.length;
 
 return everageMark;
