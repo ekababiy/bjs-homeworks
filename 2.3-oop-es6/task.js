@@ -5,12 +5,12 @@ class PrintEditionItem {
 
 	constructor(name, releaseDate, pagesCount) {
     //свойства
-	this name = name;
-	this releaseDate = releaseDate;
-	this pagesCount = pagesCount;
+	this.name = name;
+	this.releaseDate = releaseDate;
+	this.pagesCount = pagesCount;
 	//состояние
-	this state = 100;
-	this type = null;
+	this.state = 100;
+	this.type = null;
     }
     set state(newstate) {
         if (newstate < 0 ) this._state = 0;
@@ -30,22 +30,22 @@ class PrintEditionItem {
 class Magazine extends PrintEditionItem {
   constructor(name, releaseDate, pagesCount) {
     super(name, releaseDate, pagesCount);
-	this type = magazine;
+	this.type = magazine;
   }
 }
 
 class Book extends PrintEditionItem {
    constructor(name, releaseDate, pagesCount, author) {
     super(name, releaseDate, pagesCount);
-    this type = book;
-    this author = author;
+    this.type = book;
+    this.author = author;
    }
 }
 
 class NovelBook extends Book {
   constructor(name, releaseDate, pagesCount, author) {
     super(name, releaseDate, pagesCount, author);
-    this type = novel;
+    this.type = novel;
   }
 }
 
@@ -53,45 +53,56 @@ class NovelBook extends Book {
 class FantasticBook extends Book {
   constructor(name, releaseDate, pagesCount, author) {
     super(name, releaseDate, pagesCount, author);
-    this type = fantastic;
+    this.type = fantastic;
   }
 }
 
 class DetectiveBook extends Book {
   constructor(name, releaseDate, pagesCount,author) {
     super(name, releaseDate, pagesCount, author);
-    this type = detective;
+    this.type = detective;
    }
 }
+/* проверка
+const sherlock = new PrintEditionItem("Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008);
+console.log(sherlock);
+*/
 
 
 //Задача №2
 
 class Library {
 	constructor(name) {
-		this name = "name";
-		this books = [];
+		this.name = "name";
+		this.books = [];
 	}
-}
+};
 
-addBook(book) {
-    if (book.state > 30) {
-    	this.books.push(book);
-    }
-}
+addBook(book){
+	if (book.state > 30) {
+    return this.books.push(book);
+	} else {
+		return console.log("Errore,low state")
+	}
+};
 
 findBookBy(type, value) {
-	for (let book of this.books) {
-            if (book[type] == value) return book;
-        }
-        return null;
-}
+	for (let i = 0; i < this.books.length; i++) {
+      let newValue = this.books[i][type]; 
+      if (newValue === value) {
+      	return this.books[i];
+      };
+	};
+return null
+};
 
+
+/*
 giveBookByName(bookName) {
-	 let issuedBook = this.findBookBy("name", bookName);
-        this.books.splice(issuedBook, 1);
-        return issuedBook;
-       //не понимаю как реализовать это Создайте метод giveBookByName(bookName), который будет в качестве аргумента принимать название книги, запрошенной читателем. Если запрошенная книга найдена, метод должен удалять книгу из хранилища books, и возвращать её. Если книга не была найдена, метод должен возвращать null.
+}
+Если запрошенная книга найдена,
+метод должен удалять книгу из хранилища books, и возвращать её.
+Если книга не была найдена, метод должен возвращать null.
 }
 
 /*Создайте библиотеку;
@@ -106,7 +117,7 @@ giveBookByName(bookName) {
 
 //Задача №3
 
-class StudentLog {
+/*class StudentLog {
 	constructor (name) {
         this.name = name;
         this.journaleClass = {};
@@ -116,4 +127,4 @@ getName () {
         return this.name;
     }
 
-addGrade(grade, subject)
+addGrade(grade, subject)*/
