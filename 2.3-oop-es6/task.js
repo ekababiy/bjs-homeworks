@@ -4,11 +4,9 @@
 class PrintEditionItem {
 
 	constructor(name, releaseDate, pagesCount) {
-    //свойства
 	this.name = name;
 	this.releaseDate = releaseDate;
 	this.pagesCount = pagesCount;
-	//состояние
 	this.state = 100;
 	this.type = null;
     }
@@ -63,10 +61,12 @@ class DetectiveBook extends Book {
     this.type = detective;
    }
 }
-/* проверка
+
+//проверка 
+
 const sherlock = new PrintEditionItem("Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008);
 console.log(sherlock);
-*/
+
 
 
 //Задача №2
@@ -97,34 +97,93 @@ return null
 };
 
 
-/*
-giveBookByName(bookName) {
+/*giveBookByName(bookName) {
 }
+
+
+
 Если запрошенная книга найдена,
 метод должен удалять книгу из хранилища books, и возвращать её.
 Если книга не была найдена, метод должен возвращать null.
 }
 
-/*Создайте библиотеку;
-Добавьте в библиотеку несколько печатных изданий различных типов;
-Найдите книгу, изданную в 1919 году (создайте такую книгу при необходимости);
-Выдайте любую книгу;
-Испортите выданную книгу;
-Почините выданную книгу;
-Попытайтесь добавить починенную книгу обратно в библиотеку.*/
+*/
 
+//проверка 
+
+
+const library = new Library("Библиотека имени Ленина");
+
+library.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
+library.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
+library.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
+library.addBook(new Magazine("Мурзилка", 1924, 60));
+
+console.log(library.findBookBy("name", "Властелин колец")); //null
+console.log(library.findBookBy("releaseDate", 1924).name); //"Мурзилка"
+
+console.log("Количество книг до выдачи: " + library.books.length); //Количество книг до выдачи: 4
+library.giveBookByName("Машина времени");
+console.log("Количество книг после выдачи: " + library.books.length); //Количество книг после выдачи: 3
 
 
 //Задача №3
 
-/*class StudentLog {
-	constructor (name) {
+class StudentLog {
+	constructor () {
         this.name = name;
-        this.journaleClass = {};
-    }
-}
-getName () {
-        return this.name;
+        this.gradeList = {};
     }
 
-addGrade(grade, subject)*/
+getName () {
+    return this.name;
+}
+
+addGrade(grade, subject) {
+	if (!this.gradeList[subject]) {
+		this.gradeList[subject] = [];
+	}
+
+	if (grade> 0 && grade< 6) {
+		this.gradeList[subject].push(grade)
+	} else {
+		console.log("Вы пытались поставить оценку ${grade} по предмету ${subject}). Допускаются только числа от 1 до 5")
+	}
+	  return this.gradeList[subject]
+}
+
+getAverageSubject(subject) {
+	if (!this.gradeList[subject]) {
+		return 0;
+	}
+	return this.gradeList[subject].reduce((a, b) => a + b) / this.gradeList[subject].length
+}
+
+/*
+второй способ
+getAverageSubject(subject) {
+	return this.gradeList[subject] ? this.gradeList[subject].reduce((a, b) => a + b) / this.gradeList[subject].length : 0;
+}
+a - промежуточный итог, b - текущий элемент.
+*/
+
+getTotalAverage () {
+	let totalAverage = 0;
+
+	for (let i in this.gradeList){
+		totalAverage += this.getAverageSubject(i)
+	}
+	return totalAverage / Object.keys(this.gradeList).length;
+ }
+}
+
+//проверка 
+
+const log = new StudentLog('Олег Никифоров');
+
+log.addGrade(2, 'algebra');
+log.addGrade(4, 'algebra');
+log.addGrade(5, 'geometry');
+log.addGrade(4, 'geometry');
+
+console.log(log.getTotalAverage()); // 3,75
