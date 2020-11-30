@@ -10,6 +10,7 @@ class PrintEditionItem {
 	this.state = 100;
 	this.type = null;
     }
+
     set state(newstate) {
         if (newstate < 0 ) this._state = 0;
         else if (newstate > 100) this._state = 100;
@@ -26,40 +27,32 @@ class PrintEditionItem {
 }
 
 class Magazine extends PrintEditionItem {
-  constructor(name, releaseDate, pagesCount) {
-    super(name, releaseDate, pagesCount);
-	this.type = magazine;
-  }
+    type = "magazine"
+
+    constructor (name, releaseDate, pagesCount) {
+        super(name, releaseDate, pagesCount);
+    }
 }
 
 class Book extends PrintEditionItem {
-   constructor(name, releaseDate, pagesCount, author) {
-    super(name, releaseDate, pagesCount);
-    this.type = book;
-    this.author = author;
-   }
+    type = "book"
+
+    constructor(author, name, releaseDate, pagesCount) {
+        super(name, releaseDate, pagesCount);
+        this.author = author;
+    }
 }
 
 class NovelBook extends Book {
-  constructor(name, releaseDate, pagesCount, author) {
-    super(name, releaseDate, pagesCount, author);
-    this.type = novel;
-  }
+    type = "novel"
 }
 
-
 class FantasticBook extends Book {
-  constructor(name, releaseDate, pagesCount, author) {
-    super(name, releaseDate, pagesCount, author);
-    this.type = fantastic;
-  }
+    type = "fantastic"
 }
 
 class DetectiveBook extends Book {
-  constructor(name, releaseDate, pagesCount,author) {
-    super(name, releaseDate, pagesCount, author);
-    this.type = detective;
-   }
+    type = "detective"
 }
 
 //проверка 
@@ -72,46 +65,35 @@ console.log(sherlock);
 //Задача №2
 
 class Library {
-	constructor(name) {
-		this.name = "name";
-		this.books = [];
-	}
-};
+  constructor(name) {
+    this.name = name;
+    this.books = [];
+  }
 
-addBook(book){
-	if (book.state > 30) {
-    return this.books.push(book);
-	} else {
-		return console.log("Errore,low state")
-	}
-};
+  addBook(book) {
+    if (book.state > 30) {
+    	this.books.push(book);
+    }
+  }
+  
+  findBookBy(type, value) {
+    for (let i = 0; i < this.books.length; i++) {
+    if (this.books[i][type] === value) {
+    return this.books[i];
+        }
+     }
+    return null;
+    }
 
-findBookBy(type, value) {
-	for (let i = 0; i < this.books.length; i++) {
-      let newValue = this.books[i][type]; 
-      if (newValue === value) {
-      	return this.books[i];
-      };
-	};
-return null
-};
-
-
-/*giveBookByName(bookName) {
+giveBookByName (bookName) {
+        let issuedBook = this.findBookBy("name", bookName);
+        this.books.splice(issuedBook, 1);
+        return issuedBook;
+    }
 }
 
 
-
-Если запрошенная книга найдена,
-метод должен удалять книгу из хранилища books, и возвращать её.
-Если книга не была найдена, метод должен возвращать null.
-}
-
-*/
-
-//проверка 
-
-
+  
 const library = new Library("Библиотека имени Ленина");
 
 library.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
@@ -131,7 +113,7 @@ console.log("Количество книг после выдачи: " + library.
 
 class StudentLog {
 	constructor () {
-        this.name = name;
+        this.name = "name";
         this.gradeList = {};
     }
 
