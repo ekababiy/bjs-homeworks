@@ -40,9 +40,6 @@ if (isNaN(Number(percent))) {
     return totalAmount;
 }
 
-}
-
-
 function getGreeting(name) {
   
    if (!name || name == "null" || name == "undefined") {
