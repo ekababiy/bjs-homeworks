@@ -60,4 +60,3 @@ function checkBirthday(birthday) {
 }
 
 //console.log(checkBirthday(birthday));
-
