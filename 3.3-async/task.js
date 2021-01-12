@@ -1,6 +1,6 @@
 'use strict';
 
-class AlarmClock = {
+class AlarmClock {
 	constructor() {
 		this.alarmCollection = [];
 		this.timerId = null;
@@ -17,7 +17,7 @@ class AlarmClock = {
 /*Программа должна продолжать работать, но звонок не должен быть добавлен.
 Перед завершением метода добавьте в массив звонков объект со свойствами id, time, callback.*/
 	}
-}
+
 
 removeClock(id) {
 	let result = this.alarmCollection.some((alarm) => alarm.id === id);
@@ -29,9 +29,9 @@ getCurrentFormattedTime() {
 	}
 
 start () {
-	let newTime = this.getCurrentFormattedTime();
+	let newTime = this.getCurrentFormattedTime;
 	function checkClock (alarm, newTime) {
-		if (alarm.time === newTime) {
+		if (alarm.time === newTime()) {
 				alarm.callback();
 		}
 	}
@@ -57,6 +57,7 @@ clearAlarms() {
 	this.alarmCollection = [];
 }
 
+}
 
 function testCase () {
 	let clock = new AlarmClock ();
