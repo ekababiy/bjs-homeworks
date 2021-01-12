@@ -95,18 +95,20 @@ compareArrays([8, 1, 2], [8, 1, 2]); // true
 
 //2.2 и 2.2,2
 function memorize(fn, limit) {
-const memory = [];
-return function (...args) {	
-let arr = args;
-let prop = memory.find(obj => compareArrays(obj.args, arr));
-if (prop) {
-return prop.result;	
-}
-let result = fn(...args);
-memory.push({ args, result })
-if (memory.length > limit) {
-memory.shift();
-}
+	const memory = [];
+	return function (...args) {	
+		let arr = args;
+		let prop = memory.find(obj => compareArrays(obj.args, arr));
+	if (prop) {
+	return prop.result;	
+	}
+
+	let result = fn(...args);
+		memory.push({ args, result })
+		
+	if (memory.length > limit) {
+		memory.shift();
+		}
 return result;
 }
 
